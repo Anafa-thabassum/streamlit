@@ -220,7 +220,7 @@ class Database:
             params.extend([pattern, pattern, pattern, pattern])
         if due_days is not None:
             cutoff = (datetime.now(timezone.utc) - timedelta(days=due_days)).replace(microsecond=0).isoformat()
-            clauses.append("(fetch_status='Failed' OR last_fetched IS NULL OR last_fetched <= ?)")
+            clauses.append("(last_fetched IS NULL OR last_fetched <= ?)")
             params.append(cutoff)
         if ids is not None:
             selected = [int(item) for item in ids]
